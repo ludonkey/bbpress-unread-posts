@@ -2,7 +2,7 @@
 	/*
 	Plugin Name: bbPress Unread Posts
 	Description: Displays an icon next to each thread if there are unread posts for the current user in it.
-	Version: 1.1
+	Version: 1.0
 	Author: destroflyer
 	*/
 	
