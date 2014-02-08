@@ -13,10 +13,41 @@
 		if(is_user_logged_in()){
 			add_action("bbp_theme_before_topic_title", "bbp_unread_posts_PerformTopicSpecificActions");
 			add_action("bbp_theme_before_topic_title", "bbp_unread_posts_IconWrapperBegin");
+			add_action("bbp_theme_before_forum_title", "bbp_unreadforum_posts_IconWrapperBegin");
 			add_action("bbp_theme_after_topic_meta", "bbp_unread_posts_IconWrapperEnd");
+			add_action("bbp_theme_after_forum_title", "bbp_unreadforum_posts_IconWrapperEnd");
 			add_action("bbp_template_after_single_topic", "bbp_unread_posts_OnTopicVisit");
 			add_filter("bbp_get_topic_pagination_count", "bbp_unread_posts_MarkAllTopicsAsReadButtonFilter");
 		}
+	}
+	
+	function bbp_unreadforum_posts_IconWrapperEnd(){
+		echo '
+			</div>
+		';
+	}
+	
+	function bbp_unreadforum_posts_IconWrapperBegin(){
+		$isUnreadTopic = false;
+		$forum_id = bbp_unread_posts_GetCurrentLoopedForumID();
+		$params["post_parent"] = $forum_id;
+		$params["posts_per_page"] = 150;
+		bbp_has_topics( $params );
+		while ( bbp_topics() ) : bbp_the_topic();
+			$topicID = bbp_unread_posts_GetCurrentLoopedTopicID();
+			$topicLastActiveTime = bbp_convert_date(get_post_meta($topicID, '_bbp_last_active_time', true));
+			$lastVisitTime = get_post_meta($topicID, bbp_unread_posts_getLastVisitMetaKey(), true);
+			$isUnreadTopic = ($topicLastActiveTime > $lastVisitTime);
+			if ($isUnreadTopic) {
+				break;
+			}
+		endwhile;
+		echo '
+			<div class="bbpresss_unread_posts_icon">
+				<img src="' . plugins_url("images/" . ($isUnreadTopic?"folder_new.gif":"folder.gif"), __FILE__) . '">
+			</div>
+			<div style="display:table-cell;">
+		';
 	}
 	
 	function bbp_unread_posts_PerformTopicSpecificActions(){

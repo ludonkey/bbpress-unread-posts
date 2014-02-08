@@ -3,11 +3,11 @@ Contributors: destroflyer
 Tags: bbpress, topic, unread, last visit
 Tested up to: WordPress 3.4.2, bbPress 2.1.2
 
-Displays a read/unread icon next to threads and offers a "Mark all topics as read" button for each forum page.
+Displays a read/unread icon next to threads and forums and offers a "Mark all topics as read" button for each forum page.
 
 == Description ==
 
-Shows a read/unread icon next to threads (Marks topic as read when the user visits it).
+Shows a read/unread icon next to threads and forums (Marks topic as read when the user visits it).
 A "Mark all topic as read" button on each page allows to set the topics on that page as read.
 Developed for: http://jmonkeyengine.org
 
@@ -22,5 +22,5 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
-= 1.0 =
-* Initial release
+= 1.1 =
+* Add the feature to the forum list level.
